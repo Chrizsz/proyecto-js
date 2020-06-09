@@ -1,15 +1,18 @@
 $(document).ready(function(){
 
   //Slider
+  if(window.location.href.indexOf('index') > -1){
+    $('.galeria').bxSlider({
+      mode: 'fade',
+      captions: false,
+      slideWidth: 1200,
+      responsive: true
+    });
+  }
 
-  $('.galeria').bxSlider({
-    mode: 'fade',
-    captions: false,
-    slideWidth: 1200,
-    responsive: true
-  });
 
   // Posts
+  if(window.location.href.indexOf('index') > -1){
     moment.locale('es-us');
 
   var posts = [
@@ -50,7 +53,7 @@ $(document).ready(function(){
 
    $('#posts').append(post);
  });
-
+}
 
  /*Selector de tema*/
 var theme = $('#theme');
@@ -67,6 +70,46 @@ var theme = $('#theme');
    theme.attr('href', 'css/red.css')
  })
 
+//Scroll arriba de la web
+$('.subir').click(function(e){
 
+  e.preventDefault();
+
+  $('html, body').animate({
+    scrollTop: 0
+  }, 500)
+
+  return false;
+});
+
+//Login falso
+$('#login form').submit(function(){
+
+  var form_name = $('#form_name').val();
+
+  localStorage.setItem('form_name', form_name);
+
+});
+
+var form_namee = localStorage.getItem('form_name');
+
+if(form_namee!=null && form_namee!='undefined'){
+  var about_parrafo = $('#about p');
+
+  $('#about p').html('<br><strong>Bienvenido ' + form_namee + '</strong>');
+
+  about_parrafo.append('<a href="#" id="logout">Cerrar sesión</a>');
+
+  $('#login').hide();
+
+  $('#logout').click(function(){
+    localStorage.clear();
+    location.reload();
+  });
+}
+
+if(window.location.href.indexOf('about') > -1){
+  $('#acordeon').accordion();
+}
 
 });
