@@ -108,8 +108,37 @@ if(form_namee!=null && form_namee!='undefined'){
   });
 }
 
+//Acordeon
 if(window.location.href.indexOf('about') > -1){
   $('#acordeon').accordion();
 }
+
+//Reloj
+if(window.location.href.indexOf('reloj') > -1){
+
+  setInterval(function(){
+    var reloj = moment().format('hh:mm:ss');
+    $('#reloj').html(reloj);
+  }, 1000);
+
+}
+
+//Validación
+
+if(window.location.href.indexOf('contact') > -1){
+
+  $('form input[name="date"]').datepicker({
+    dateFormat: 'dd-mm-yy'
+  });
+
+  $.validate({
+    lang : 'es',
+    errorMessagePosition: 'top',
+    scrollToTopOnError: true 
+  });
+
+}
+
+
 
 });
